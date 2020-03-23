@@ -17,6 +17,12 @@ var stringifyJSON = function(obj) {
     }
 
   };
+  const chopper = function(string) {
+    let chopped = string.split('');
+    chopped.pop();
+    chopped = chopped.join('');
+    return chopped;
+  };
 
   if (isUnconvertable(obj)) {
     return 'null';
@@ -39,11 +45,7 @@ var stringifyJSON = function(obj) {
     }
 
     if (resultString.length > 2) {
-      resultString = resultString.split('');
-      resultString.pop();
-      resultString = resultString.join('');
-
-
+      resultString = chopper(resultString);
     }
 
     resultString += ']';
@@ -57,11 +59,14 @@ var stringifyJSON = function(obj) {
 
     for (var key in obj) {
 
-      if (isUnconvertable(obj[key]) ) {
+      if (isUnconvertable(obj[key]) && obj[key] !== null) {
         continue;
       }
       resultString += stringifyJSON(key) + ':';
-      resultString += stringifyJSON(obj[key]);
+      resultString += stringifyJSON(obj[key]) + ',';
+    }
+    if (resultString[resultString.length - 1] !== '{') {
+      resultString = chopper(resultString);
     }
 
     resultString += '}';
