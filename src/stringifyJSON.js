@@ -12,15 +12,17 @@ var stringifyJSON = function(obj) {
     return '"' + obj + '"';
   }
 
-  if (typeof obj === 'boolean'){
+  if (typeof obj === 'boolean' || typeof obj === 'number'){
     return obj + '';
   }
 
   if (Array.isArray(obj)){
+    resultString += '[';
     for (let i = 0; i < obj.length - 1; i++){
       resultString += stringifyJSON(obj[i]) + ',';
     }
     resultString += stringifyJSON(obj[obj.length - 1]);
+    resultString += ']';
   }
 
   return resultString;
