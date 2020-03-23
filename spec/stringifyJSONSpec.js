@@ -3,7 +3,7 @@ describe('stringifyJSON', function() {
   it('should match the result of calling JSON.stringify', function() {
 
     stringifiableObjects.forEach(function(test) {
-      var expected = JSON.stringify(test);
+      var expected = JSON.stringify(tesgt);
       var result = stringifyJSON(test);
       expect(result).to.equal(expected);
     });
