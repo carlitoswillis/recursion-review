@@ -8,7 +8,19 @@ var stringifyJSON = function(obj) {
   // recursive cases: arrays and objects
   let resultString = '';
 
+  var isUnconvertable = function (type) {
 
+    if (typeof type === 'undefined' || typeof type === 'Symbol' || typeof type === 'function' || typeof type === 'null') {
+      return true;
+    } else {
+      return false;
+    }
+
+  };
+
+  if (isUnconvertable(obj)) {
+    return null;
+  }
 
   if (typeof obj === 'string') {
     return '"' + obj + '"';
@@ -29,7 +41,12 @@ var stringifyJSON = function(obj) {
 
   if (typeof obj === 'object') {
     resultString += '{';
+
     for (var key in obj) {
+
+      if (isUnconvertable(obj[key]) ) {
+        continue;
+      }
       resultString += stringifyJSON(key) + ':';
       resultString += stringifyJSON(obj[key]);
     }
