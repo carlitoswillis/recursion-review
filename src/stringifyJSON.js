@@ -9,6 +9,7 @@ var stringifyJSON = function(obj) {
   let resultString = '';
 
 
+
   if (typeof obj === 'string') {
     return '"' + obj + '"';
   }
