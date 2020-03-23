@@ -10,7 +10,7 @@ var stringifyJSON = function(obj) {
 
   var isUnconvertable = function (type) {
 
-    if (typeof type === 'undefined' || typeof type === 'Symbol' || typeof type === 'function' || typeof type === 'null') {
+    if (typeof type === 'undefined' || typeof type === 'Symbol' || typeof type === 'function' || type === null) {
       return true;
     } else {
       return false;
@@ -19,7 +19,7 @@ var stringifyJSON = function(obj) {
   };
 
   if (isUnconvertable(obj)) {
-    return null;
+    return 'null';
   }
 
   if (typeof obj === 'string') {
@@ -31,12 +31,25 @@ var stringifyJSON = function(obj) {
   }
 
   if (Array.isArray(obj)) {
+
     resultString += '[';
-    for (let i = 0; i < obj.length - 1; i++) {
+
+    for (let i = 0; i < obj.length; i++) {
       resultString += stringifyJSON(obj[i]) + ',';
     }
-    resultString += stringifyJSON(obj[obj.length - 1]);
+
+    if (resultString.length > 2) {
+      resultString = resultString.split('');
+      resultString.pop();
+      resultString = resultString.join('');
+
+
+    }
+
     resultString += ']';
+
+    return resultString;
+
   }
 
   if (typeof obj === 'object') {
