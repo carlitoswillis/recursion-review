@@ -8,6 +8,7 @@ var stringifyJSON = function(obj) {
   // recursive cases: arrays and objects
   let resultString = '';
 
+
   if (typeof obj === 'string') {
     return '"' + obj + '"';
   }
