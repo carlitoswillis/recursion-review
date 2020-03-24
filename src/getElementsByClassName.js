@@ -8,13 +8,17 @@ var getElementsByClassName = function(className) {
   // your code here
   const nodes = [];
 
-  let currentNode;
-
-  const dive = function(currNode) {
-    let classNames = currNode.className.split(' '); // maybe comment this out
-    // currNode.classList.includes(className)||
+  const diveNodes = function(currNode) {
+    currNode = currNode || document.body;
+    let classNames = currNode.className;
     if (classNames.includes(className)) {
       nodes.push(currNode);
     }
+    const childrenNodes = currNode.children;
+    for (let i = 0; i < childrenNodes.length; i++) {
+      diveNodes(childrenNodes[i]);
+    }
   };
+  diveNodes();
+  return nodes;
 };
