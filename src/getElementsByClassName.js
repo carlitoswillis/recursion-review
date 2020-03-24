@@ -4,7 +4,17 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
+var getElementsByClassName = function(className) {
   // your code here
+  const nodes = [];
+
+  let currentNode;
+
+  const dive = function(currNode) {
+    let classNames = currNode.className.split(' '); // maybe comment this out
+    // currNode.classList.includes(className)||
+    if (classNames.includes(className)) {
+      nodes.push(currNode);
+    }
+  };
 };
